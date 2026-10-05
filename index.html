@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Utho Kikkar: Keyword Spotting for Indian Languages</title>
+  <meta name="description" content="Utho Kikkar, a wake word model for Indian languages by Team Folklore. Say ਉੱਠੋ ਕਿੱਕਰ / उठो किक्कर and watch the kikkar tree bloom. A prototype for SIH 2026 that runs entirely in your browser.">
+  <meta name="theme-color" content="#8a1c1c">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/tiro-gurmukhi-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/tiro-gurmukhi-gurmukhi.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/tiro-devanagari-hindi-devanagari.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script src="model/utho_kikkar.js" defer></script>
+  <script src="js/frontend.js" defer></script>
+  <script src="js/tflite.js" defer></script>
+  <script src="js/wakeword.js" defer></script>
+  <script src="js/capture.js" defer></script>
+  <script src="js/tree.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <div class="band" aria-hidden="true"></div>
+
+  <main>
+    <section class="title">
+      <h1><span class="name">Utho Kikkar:</span> <span class="tagline">Keyword Spotting for Indian Languages</span></h1>
+      <p class="scripts">
+        <span lang="pa">ਉੱਠੋ ਕਿੱਕਰ: ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਲਈ ਕੀਵਰਡ ਸਪੌਟਿੰਗ</span>
+        <span lang="hi">उठो किक्कर: भारतीय भाषाओं के लिए कीवर्ड स्पॉटिंग</span>
+      </p>
+    </section>
+
+    <section class="stage" aria-labelledby="listen-title">
+      <h2 id="listen-title" class="sr-only">Listen</h2>
+      <canvas id="tree" class="tree" role="img" aria-label="A kikkar tree at night. Its golden flowers open as the model hears its name and burst into bloom when it wakes."></canvas>
+
+      <p class="say"><span lang="pa">ਬੋਲੋ “ਉੱਠੋ ਕਿੱਕਰ”</span> <span class="dot" aria-hidden="true">◆</span> <span lang="hi">बोलिए “उठो किक्कर”</span></p>
+
+      <div class="controls">
+        <button id="mic" class="primary" type="button" disabled>Loading model…</button>
+        <div class="level" title="Microphone level"><i id="mic-bar"></i></div>
+        <label class="check"><input id="sound" type="checkbox" checked> Tumbi on wake</label>
+        <output id="wakes" class="count">0 wakes</output>
+      </div>
+      <p id="status" class="status" role="status">Press start and allow the microphone. The audio never leaves this tab.</p>
+
+      <figure class="graph">
+        <canvas id="trace" aria-label="How sure the model was over the last ten seconds"></canvas>
+        <figcaption><span>Last 10 seconds</span><span>Wakes above the threshold line</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="prototype">
+      <h2>A Prototype, not the final model</h2>
+      <p>This is the second version of the Utho Kikkar model, and has been tested & benchmarked on STM32N657 and ESP32S3. We built it as a working prototype to implement our complete idea on both boards. It isn't finalized.<br><u> <b>We'll build the final model at SIH 2026, improving on this iteration.</b></u></p>
+      <p lang="pa">ਇਹ ਮਾਡਲ ਦਾ ਦੂਜਾ ਸੰਸਕਰਣ ਹੈ, ਇੱਕ ਪ੍ਰੋਟੋਟਾਈਪ। ਅੰਤਿਮ ਮਾਡਲ SIH 2026 ਵਿੱਚ ਬਣਾਇਆ ਜਾਵੇਗਾ।</p>
+      <p lang="hi">यह मॉडल का दूसरा संस्करण है, एक प्रोटोटाइप। अंतिम मॉडल SIH 2026 में बनाया जाएगा।</p>
+    </section>
+
+    <section class="why">
+      <div>
+        <h2><span lang="pa">ਕਿੱਕਰ</span> <span lang="hi">बबूल</span> <span>The kikkar</span></h2>
+        <p>Kikkar is more than a tree. It is a living piece of our heritage, deeply rooted in our folklore. For generations, its twigs were used each morning as a datun. Just like the Kikkar tree grows and thrives in the harshest weather, our model is designed to run well on the most constrained hardware, needing only <strong>about 35 KB of RAM</strong> at its peak.</p>
+      </div>
+      <div>
+        <h2><span lang="pa">ਸਾਡੀਆਂ ਭਾਸ਼ਾਵਾਂ</span> <span lang="hi">हमारी भाषाएँ</span> <span>Our languages</span></h2>
+        <p>Voice assistants wake to English keywords. We wanted something that felt like home, something rooted in our culture and folklore. Our model is built to wake to Indian languages, on a bilingual phrase "Utho Kikkar". This makes sure that new tech doesn't dilute our culture, but carries it forward.</p>
+      </div>
+    </section>
+
+    <section class="links" aria-labelledby="links-title">
+      <h2 id="links-title"><span lang="pa">ਵੇਖੋ</span> <span lang="hi">देखें</span> <span>Watch and explore</span></h2>
+      <div class="videos">
+        <a href="https://youtu.be/m9g7-e42MQk" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M9.8 7.4v9.2l7.2-4.6z"/></svg>
+          Prototype video
+        </a>
+        <a href="https://youtu.be/pOFR8rgGgtA" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M9.8 7.4v9.2l7.2-4.6z"/></svg>
+          Complete video
+        </a>
+      </div>
+      <div class="resources">
+        <a href="https://github.com/SherTheCoder/Folklore" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 4.5 2 8l3.5 3.5m5-7L14 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><b>GitHub</b><small>Source code</small></span>
+        </a>
+        <a href="https://huggingface.co/SherTheCoder/TeamFolklore_Model" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="4.5" y="4.5" width="7" height="7" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M6.5 2v2.5m3-2.5v2.5m-3 7V14m3-2.5V14M2 6.5h2.5M2 9.5h2.5m7-3H14m-2.5 3H14" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+          <span><b>Model</b><small>Hugging Face</small></span>
+        </a>
+        <a href="https://huggingface.co/datasets/SherTheCoder/TeamFolklore_UthoKikkar" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.1"><ellipse cx="8" cy="4" rx="5" ry="2"/><path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/></g></svg>
+          <span><b>Dataset</b><small>Hugging Face</small></span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="sayings">
+      <p lang="hi">तपती धूप में पला, लोक-गीतों में ढला। बंजर में भी अड़ा रहे, एक पुकार पर खड़ा रहे।</p>
+      <p lang="pa">ਤੱਤੀਆਂ ਲੂਆਂ 'ਚ ਪਲ਼ੀ, ਸਾਡੇ ਲੋਕ-ਗੀਤਾਂ 'ਚ ਢਲ਼ੀ। ਥੋੜ੍ਹੇ ਵਿੱਚ ਵੀ ਖਿੜਦੀ ਏ, ਇੱਕ ਵਾਜ ਤੇ ਉੱਠ ਖੜ੍ਹਦੀ ਏ।</p>
+      <p>Raised by the scorching sun, thriving on little, it wakes to serve.</p>
+    </div>
+    <p class="credit">Made by Team Folklore · For SIH 2026</p>
+  </footer>
+  <div class="band" aria-hidden="true"></div>
+</body>
+</html>
