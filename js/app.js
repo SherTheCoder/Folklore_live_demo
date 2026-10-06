@@ -27,6 +27,10 @@ function say(text, error = false) {
   statusLine.classList.toggle('error', error);
 }
 
+function track(event) {
+  window.umami?.track(event);
+}
+
 // The AudioContext is created before the first await so Safari still counts it as part of the click.
 async function startListening() {
   if (!navigator.mediaDevices?.getUserMedia) {
@@ -69,10 +73,12 @@ async function startListening() {
     showWakes(0);
     const rate = context.sampleRate === SAMPLE_RATE ? '' : ` Your mic runs at ${context.sampleRate / 1000} kHz, so it's resampled to 16 kHz here.`;
     say(`Listening.${rate}`);
+    track('Start listening');
     requestAnimationFrame(draw);
   } catch (error) {
     context.close();
     say(micError(error), true);
+    track('Mic error');
   } finally {
     micButton.disabled = false;
   }
@@ -133,6 +139,7 @@ function hear(samples) {
 
 function wake(level) {
   showWakes(++live.wakes);
+  track('Wake');
   say(`Woke at ${new Date().toLocaleTimeString()} with a score of ${level.toFixed(2)}.`);
   tree.wake();
 

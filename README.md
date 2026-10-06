@@ -1,6 +1,6 @@
 # Utho Kikkar: Keyword Spotting for Indian Languages
 
-Made by Team Folklore for SIH 2026. A static page for trying version 2 of the Utho Kikkar wake word model (the 64-channel `alt_64ch` build) with your microphone. Say ਉੱਠੋ ਕਿੱਕਰ / उठो किक्कर and the kikkar tree blooms. Everything runs in the page and no audio leaves the browser.
+Made by Team Folklore for SIH 2026. A static page for trying version 2 of the Utho Kikkar wake word model (the 64-channel `alt_64ch` build) with your microphone. Say ਉੱਠੋ ਕਿੱਕਰ / उठो किक्कर and the kikkar tree blooms. Everything runs in the page and no audio leaves the browser. Visits and button presses are counted anonymously with Umami Cloud (no cookies); its Website ID is in `index.html`.
 
 This model is a prototype. The final one will be built at SIH 2026.
 
